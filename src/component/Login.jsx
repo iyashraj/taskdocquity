@@ -8,16 +8,19 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleSubmit = (e) => {
-    if (email.length != 0 && password.length != 0) {
+    if (email.length && password.length) {
       navigate("/home");
     } else {
-      setError("Please fill all the fields.");
+        setError("Please fill all the fields.");
+        setTimeout(()=>{
+            window.location.reload()
+        },3000)
     }
   };
   return (
     <div className="App">
       <h3>Log In</h3>
-      <form>
+      <form  onClick={() => handleSubmit()}>
         <label>Email:</label>
         <input
           type="email"
@@ -35,7 +38,7 @@ const Login = () => {
           required
         />
         {error}
-        <button type="submit" onClick={() => handleSubmit()}>
+        <button type="submit">
           Submit
         </button>
       </form>
